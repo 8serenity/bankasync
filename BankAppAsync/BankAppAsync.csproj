@@ -78,7 +78,33 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="LoginFailed.xaml.cs">
+      <DependentUpon>LoginFailed.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805071454231_InitialCreate.cs" />
+    <Compile Include="Migrations\201805071454231_InitialCreate.Designer.cs">
+      <DependentUpon>201805071454231_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805071526412_asdasd.cs" />
+    <Compile Include="Migrations\201805071526412_asdasd.Designer.cs">
+      <DependentUpon>201805071526412_asdasd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805080344284_add bank id to client.cs" />
+    <Compile Include="Migrations\201805080344284_add bank id to client.Designer.cs">
+      <DependentUpon>201805080344284_add bank id to client.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="OperationsUI.xaml.cs">
+      <DependentUpon>OperationsUI.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Transaction.cs" />
+    <Compile Include="UserUI.xaml.cs">
+      <DependentUpon>UserUI.xaml</DependentUpon>
+    </Compile>
+    <Page Include="LoginFailed.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -96,6 +122,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="OperationsUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -111,6 +145,15 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Migrations\201805071454231_InitialCreate.resx">
+      <DependentUpon>201805071454231_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805071526412_asdasd.resx">
+      <DependentUpon>201805071526412_asdasd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805080344284_add bank id to client.resx">
+      <DependentUpon>201805080344284_add bank id to client.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -122,7 +165,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">

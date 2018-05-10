@@ -9,21 +9,50 @@ namespace BankAppAsync
     class ATMService
     {
         public static BankDB Bank { get; private set; }
-        static bool IsAccountValid(string iin, string checkedPassword)
+        public static bool IsAccountValid(string iin, string checkedPassword)
         {
-            return Bank.Clients.Where(c => c.IIN == iin).Any(c => c.PasswordHash == checkedPassword.GetHashCode().ToString());
+            var chechedHash = checkedPassword.GetHashCode().ToString();
+            return Bank.Clients.Where(c => c.IIN == iin).Any(c => c.PasswordHash == chechedHash);
+        }
+        static ATMService()
+        {
+            Bank = new BankDB();
         }
 
-        static IEnumerable<Account> GetClientAccount(Client client)
+        public static IEnumerable<Account> GetClientAccount(Client client)
         {
-            return Bank.Accounts.Where(a => a.Client == client);
+            return Bank.Accounts.Where(a => a.ClientId == client.Id);
         }
 
-        static void Deposit(Account account, double sum)
+        public static bool Deposit(Account account, double sum)
         {
-            
-            account.Balance += sum;
-            
+            var updatingAccount = Bank.Accounts.SingleOrDefault(a => a.Id == account.Id);
+            if (updatingAccount == null)
+            {
+                return false;
+            }
+            else
+            {
+                updatingAccount.Balance += sum;
+                Bank.SaveChanges();
+                return true;
+            }
         }
+
+        public static bool Withdraw(Account account, double sum)
+        {
+            var updatingAccount = Bank.Accounts.SingleOrDefault(a => a.Id == account.Id);
+            if (updatingAccount == null || updatingAccount.Balance < sum)
+            {
+                return false;
+            }
+            else
+            {
+                updatingAccount.Balance -= sum;
+                Bank.SaveChanges();
+                return true;
+            }
+        }
+
     }
 }

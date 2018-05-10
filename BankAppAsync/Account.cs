@@ -14,9 +14,7 @@ namespace BankAppAsync
         public double Balance { get; set; }
         [ForeignKey("Client")]
         public int ClientId { get; set; }
-        [ForeignKey("Bank")]
-        public int BankId { get; set; }
         public virtual Client Client { get; set; }
-        public virtual Bank Bank { get; set; }
+        public virtual ICollection<Transaction> Transactions { get; set; }
     }
 }

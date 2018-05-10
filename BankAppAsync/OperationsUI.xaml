@@ -1,0 +1,20 @@
+﻿<Window x:Class="BankAppAsync.OperationsUI"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BankAppAsync"
+        mc:Ignorable="d"
+        Title="OperationsUI" Height="450" Width="800">
+    <Grid>
+        <TextBlock Name="accountNumberInfo" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Операции со счетом с номером" Margin="0 -200 0 0" VerticalAlignment="Center"/>
+        <TextBlock Name="currentSumInfo" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Текущий баланс: " Margin="0 -150 0 0" VerticalAlignment="Center"/>
+        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Введите сумму:" Margin="0 -100 0 0" VerticalAlignment="Center"/>
+        <TextBlock Name="errorInfo" HorizontalAlignment="Center" Width="550" TextWrapping="Wrap" Margin="0 -60 0 0" VerticalAlignment="Center" Foreground="Red"/>
+        <TextBox Name="enteredAmount" HorizontalAlignment="Center" Height="23" Margin="0,0,0,0" TextWrapping="Wrap" Text="235,33" Width="120" />
+        <TextBlock Name="currencyInfo" HorizontalAlignment="Center" TextWrapping="Wrap" Text="$" Margin="-150 0 0 0" VerticalAlignment="Center"/>
+        <Button Name="depositButton" Click="DepositClicked" Content="Пополнить" HorizontalAlignment="Left" Margin="307,245,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Name="withdrawButton" Click="WithdrawClicked" Content="Снять" HorizontalAlignment="Left" Margin="410,245,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Name="backButton" Click="BackClicked" Content="Назад" HorizontalAlignment="Left" Margin="354,291,0,0" VerticalAlignment="Top" Width="75"/>
+    </Grid>
+</Window>

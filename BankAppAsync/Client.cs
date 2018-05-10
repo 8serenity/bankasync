@@ -13,6 +13,8 @@ namespace BankAppAsync
         public string Name { get; set; }
         public string Surname { get; set; }
         public string PasswordHash { get; set; }
+        public int BankId { get; set; }
+        public virtual Bank Bank { get; set; }
         public virtual HashSet<Account> Accounts { get; set; }
         public Client()
         {

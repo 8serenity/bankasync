@@ -8,14 +8,13 @@ namespace BankAppAsync
 {
     public class Bank
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public HashSet<Client> Clients { get; set; }
-        public HashSet<Account> Accounts { get; set; }
 
         public Bank()
         {
             Clients = new HashSet<Client>();
-            Accounts = new HashSet<Account>();
         }
     }
 }

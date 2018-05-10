@@ -12,11 +12,8 @@ namespace BankAppAsync
         public int Id { get; set; }
         public DateTime Time { get; set; }
         public double Sum { get; set; }
-        [ForeignKey("SenderAccount")]
-        public int SenderId { get; set; }
-        [ForeignKey("ReceiverAccount")]
-        public int ReceiverId { get; set; }
-        public Account SenderAccount { get; set; }
-        public Account ReceiverAccount { get; set; }
+        [ForeignKey("Account")]
+        public int AccountId { get; set; }
+        public virtual Account Account { get; set; }
     }
 }

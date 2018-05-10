@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,36 +14,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-/*
-        Реализовать классы Banc, Client, Account.
-        Изначально клиенту нужно открыть счёт в банке,
-        получить номер счёта, получить свой пароль, положить сумму на счёт.
-
-    1.	        Приложение предлагает ввести пароль предполагаемой кредитной
-                карточки, даётся 3 попытки на правильный ввод пароля. Если попытки
-                исчерпаны, приложение выдаёт соответствующее сообщение и завершается.
-    
-    2.	        При успешном вводе пароля выводится меню. Пользователь может выбрать одно из нескольких действий:
-                a.	вывод баланса на экран;
-                b.	пополнение счёта;
-                c.	снять деньги со счёта;
-                d.	выход.
-    
-    3.	        Если пользователь выбирает вывод баланса на экран,
-                приложение отображает состояние предполагаемого счёта, после чего
-                предлагает либо вернуться в меню, либо совершить выход.
-    
-    4.	        Если пользователь выбирает пополнение счёта, программа
-                запрашивает сумму для пополнения и выполняет операцию, сопровождая её
-                выводом соответствующего комментария. Затем следует предложение вернуться в меню или выполнить выход.
-    
-    5.	        Если пользователь выбирает снять деньг со счёта, программа запрашивает сумму.
-                Если сумма превышает сумму счёта пользователя, программа выдаёт сообщение и
-                переводит пользователя в меню. Иначе отображает сообщение о том,
-                что сумма снята со счёта и уменьшает сумму счёта на указанную величину.
-     */
-
-
 namespace BankAppAsync
 {
     /// <summary>
@@ -50,10 +21,41 @@ namespace BankAppAsync
     /// </summary>
     public partial class MainWindow : Window
     {
+        private delegate bool IsValidAccountAsync(string iin, string checkPassword);
+        private delegate Client GetUserAsync(Func<Client, bool> asd);
+        public int LoginAttempts { get; private set; }
+        public NavigationService navigation { get; set; }
         public MainWindow()
         {
-
             InitializeComponent();
+            LoginAttempts = 3;
+            navigation = NavigationService.GetNavigationService(this);
+            passwordBox.Password = "sfsfsefsef";
+            iinBox.Text = "234234234221";
+        }
+
+        private void LoginAttempt(object sender, RoutedEventArgs e)
+        {
+            IsValidAccountAsync validator = ATMService.IsAccountValid;
+            IAsyncResult asyncResult = validator.BeginInvoke(iinBox.Text, passwordBox.Password, null, null);
+            LoginAttempts--;
+            if (!validator.EndInvoke(asyncResult))
+            {
+                if (LoginAttempts <= 0)
+                {
+                    LoginFailed nextPage = new LoginFailed();
+                    nextPage.Show();
+                    this.Close();
+                }
+                attemptsLeft.Visibility = Visibility.Visible;
+                attemptsLeft.Text = "Неверный пароль или логин. Осталось попыток: " + LoginAttempts;
+            }
+            else
+            {
+                UserUI userUI = new UserUI(ATMService.Bank.Clients.SingleOrDefault(c => c.IIN == iinBox.Text));
+                userUI.Show();
+                this.Close();
+            }
         }
     }
 }

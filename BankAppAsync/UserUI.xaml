@@ -1,0 +1,21 @@
+﻿<Window x:Class="BankAppAsync.UserUI"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BankAppAsync"
+        mc:Ignorable="d"
+        Title="UserUI" Height="450" Width="800">
+    <Grid>
+        <TextBlock Name="greetingUserUI" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 0 300">Добро пожаловать</TextBlock>
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 30 0 300">Нажмите два раза на счет для операций</TextBlock>
+
+        <DataGrid Name="userAccountsGrid" ColumnWidth="*" Height="250" Width="320" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" CanUserResizeColumns="False" MouseDoubleClick="SelectedAccountUI">
+            <DataGrid.Columns >
+                <DataGridTextColumn Header="Номер счета" Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="Валюта" Binding="{Binding Currency}"/>
+                <DataGridTextColumn Header="Баланс" Binding="{Binding Balance}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
